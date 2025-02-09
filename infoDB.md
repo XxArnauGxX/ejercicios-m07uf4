@@ -1,0 +1,2 @@
+DBname: moviesdb
+CollectionName: films
