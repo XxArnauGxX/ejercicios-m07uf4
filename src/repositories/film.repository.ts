@@ -13,11 +13,16 @@ export class FilmRepository {
   };
 
   getList = async (start?: number, end?: number) => {
-    let query = FilmModel.find().select('_id title releaseYear director');
+    let query = FilmModel.find().select('_id title releasedDate director');
     if (start !== undefined && end !== undefined) {
       const limit = end - start;
       query = query.skip(start).limit(limit);
     }
     return await query;
+  };
+
+  create = async (filmData: any) => {
+    const film = new FilmModel(filmData);
+    return await film.save();
   };
 }

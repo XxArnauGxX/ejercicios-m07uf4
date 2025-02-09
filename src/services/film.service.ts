@@ -21,4 +21,8 @@ export class FilmService {
     const films = await this.filmRepository.getList(start, end);
     return films;
   };
+
+  create = async (filmData: any) => {
+    return await this.filmRepository.create(filmData);
+  };
 }

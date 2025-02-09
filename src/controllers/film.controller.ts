@@ -23,8 +23,8 @@ export class FilmController {
   listFilms = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { start, end } = req.query;
-      const startNum: number | undefined = start ? parseInt(start as string, 10) : undefined;
-      const endNum: number | undefined = end ? parseInt(end as string, 10) : undefined;
+      let startNum: number | undefined = start ? parseInt(start as string, 10) : undefined;
+      let endNum: number | undefined = end ? parseInt(end as string, 10) : undefined;
 
       const films = await this.filmService.getList(startNum, endNum);
 
@@ -32,12 +32,24 @@ export class FilmController {
         id: film._id,
         title: film.title,
         director: film.director,
-        releasedDate: film.releaseYear,
+        releasedDate: film.releasedDate,
       }));
 
       res.status(200).json({
         message: 'Films list fetched successfully',
         data: filmsMapped,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  create = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const newFilm = await this.filmService.create(req.body);
+      res.status(201).json({
+        message: 'Film created successfully',
+        data: newFilm,
       });
     } catch (error) {
       next(error);
