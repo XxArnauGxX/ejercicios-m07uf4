@@ -16,4 +16,9 @@ export class FilmService {
     }
     return film;
   };
+
+  getList = async (start?: number, end?: number) => {
+    const films = await this.filmRepository.getList(start, end);
+    return films;
+  };
 }

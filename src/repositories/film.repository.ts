@@ -11,4 +11,13 @@ export class FilmRepository {
   getById = async (id: string) => {
     return await this.baseRepository.getById(id);
   };
+
+  getList = async (start?: number, end?: number) => {
+    let query = FilmModel.find().select('_id title releaseYear director');
+    if (start !== undefined && end !== undefined) {
+      const limit = end - start;
+      query = query.skip(start).limit(limit);
+    }
+    return await query;
+  };
 }
