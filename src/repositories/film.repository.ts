@@ -25,4 +25,12 @@ export class FilmRepository {
     const film = new FilmModel(filmData);
     return await film.save();
   };
+
+  update = async (id: string, filmData: any) => {
+    return await FilmModel.findByIdAndUpdate(id, filmData, { new: true });
+  };
+
+  delete = async (id: string) => {
+    return await FilmModel.findByIdAndDelete(id);
+  }
 }

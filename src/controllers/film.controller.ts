@@ -55,4 +55,27 @@ export class FilmController {
       next(error);
     }
   };
+
+  update = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const updatedFilm = await this.filmService.update(req.params.id, req.body);
+      res.status(200).json({
+        message: 'Film updated successfully',
+        data: updatedFilm,
+      });
+    } catch(error) {
+      next(error);
+    }
+  }
+
+  delete = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await this.filmService.delete(req.params.id);
+      res.status(200).json({
+        message: 'Film deleted successfully',
+      });
+    } catch(error) {
+      next(error);
+    }
+  }
 }

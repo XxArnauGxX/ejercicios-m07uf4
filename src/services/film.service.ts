@@ -25,4 +25,19 @@ export class FilmService {
   create = async (filmData: any) => {
     return await this.filmRepository.create(filmData);
   };
+
+  update = async (id: string, filmData: any) => {
+    const updatedFilm = await this.filmRepository.update(id, filmData);
+    if (!updatedFilm) {
+      throw new AppError('Film not found', httpStatus.notFound);
+    }
+    return updatedFilm;
+  };
+
+  delete = async (id: string) => {
+    const deletedFilm = await this.filmRepository.delete(id);
+    if (!deletedFilm) {
+      throw new AppError('Film not found', httpStatus.notFound);
+    }
+  };
 }

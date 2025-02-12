@@ -42,3 +42,31 @@ export const filmCreateSchema = Joi.object({
     )
     .required(),
 });
+
+export const filmUpdateSchema = Joi.object({
+  title: Joi.string()
+    .alphanum()
+    .min(2)
+    .max(50),
+  sinopsis: Joi.string()
+    .min(2)
+    .max(120),
+  director: Joi.string()
+    .pattern(/^[A-Za-z\s]+$/)
+    .min(3)
+    .max(20),
+  releasedDate: Joi.date(),
+  actors: Joi.array()
+    .items(
+      Joi.object({
+        firstName: Joi.string()
+          .pattern(/^[A-Za-z\s]+$/)
+          .min(3)
+          .max(20),
+        lastName: Joi.string()
+          .pattern(/^[A-Za-z\s]+$/)
+          .min(3)
+          .max(20),
+      })
+    ),
+});

@@ -10,7 +10,7 @@ export const createConnection = async () => {
     const dbUrl = process.env.DB_URL ?? '';
 
     await mongoose.connect(dbUrl, options);
-    console.log('INFO Connected to the DB');
+    console.log('Connected to the DB');
 
     mongoose.connection.on('error', (error) => {
       console.log('ERROR The connection was interrupted: ', error);
