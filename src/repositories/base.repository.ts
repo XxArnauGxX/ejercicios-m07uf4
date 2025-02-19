@@ -13,4 +13,24 @@ export class BaseRepository<T extends Document> {
   async getById(id: string) {
     return await this.model.findById(id);
   }
+
+  async create(item: T): Promise<T> {
+    return this.model.create(item);
+  }
+
+  async findAll(): Promise<T[]> {
+    return this.model.find();
+  }
+
+  async findById(id: string): Promise<T | null> {
+    return this.model.findById(id);
+  }
+
+  async update(id: string, item: Partial<T>): Promise<T | null> {
+    return this.model.findByIdAndUpdate(id, item, { new: true });
+  }
+
+  async delete(id: string): Promise<T | null> {
+    return this.model.findByIdAndDelete(id);
+  }
 }
